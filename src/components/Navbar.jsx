@@ -1,0 +1,117 @@
+import { useState, useEffect } from 'react'
+import { Shield, Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const navLinks = [
+    { href: '#services', label: 'Services' },
+    { href: '#expertise', label: 'Expertise' },
+    { href: '#contact', label: 'Contact' },
+  ]
+
+  return (
+    <header
+      role="banner"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800'
+          : 'bg-transparent'
+      }`}
+    >
+      <nav
+        role="navigation"
+        aria-label="Navigation principale"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
+        <div className="flex items-center justify-between h-16">
+          <a
+            href="#"
+            className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors"
+            aria-label="CyberShield Solutions - Accueil"
+          >
+            <Shield className="w-7 h-7" aria-hidden="true" />
+            <span className="text-xl font-bold text-slate-100">
+              Cyber<span className="text-blue-500">Shield</span>
+            </span>
+          </a>
+
+          <ul className="hidden md:flex items-center gap-8" role="list">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className="text-slate-300 hover:text-blue-400 transition-colors font-medium text-sm tracking-wide"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a
+                href="#contact"
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
+                aria-label="Demander un audit gratuit"
+              >
+                Audit Gratuit
+              </a>
+            </li>
+          </ul>
+
+          <button
+            className="md:hidden text-slate-300 hover:text-white transition-colors p-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+            aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+          </button>
+        </div>
+
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              id="mobile-menu"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-md"
+            >
+              <ul className="flex flex-col py-4 gap-2" role="list">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      className="block px-4 py-2 text-slate-300 hover:text-blue-400 transition-colors font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li className="px-4 pt-2">
+                  <a
+                    href="#contact"
+                    className="block w-full text-center px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Audit Gratuit
+                  </a>
+                </li>
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </header>
+  )
+}
