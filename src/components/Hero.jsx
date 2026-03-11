@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, ShieldCheck, ChevronLeft, ChevronRight, Monitor, Cloud, Code } from 'lucide-react'
 
-// Carousel slides data
+// Carousel slides data – each slide has a background image URL
 const SLIDES = [
   {
     id: 'soc',
@@ -12,10 +12,9 @@ const SLIDES = [
     description:
       'Un Centre Opérationnel de Sécurité actif jour et nuit. Nos analystes détectent et neutralisent les menaces avant qu\'elles n\'impactent votre activité.',
     icon: Monitor,
-    accentFrom: 'from-blue-400',
-    accentTo: 'to-blue-600',
-    glowColor: 'bg-blue-600/5',
-    glowColor2: 'bg-blue-800/5',
+    accentFrom: 'from-emerald-400',
+    accentTo: 'to-emerald-600',
+    bgImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1920&q=80',
   },
   {
     id: 'cloud',
@@ -25,10 +24,9 @@ const SLIDES = [
     description:
       'Sécurisez vos environnements AWS, Azure et GCP avec nos architectures Zero Trust et nos politiques de conformité adaptées au cloud hybride.',
     icon: Cloud,
-    accentFrom: 'from-indigo-400',
-    accentTo: 'to-blue-500',
-    glowColor: 'bg-indigo-600/5',
-    glowColor2: 'bg-blue-700/5',
+    accentFrom: 'from-violet-400',
+    accentTo: 'to-violet-600',
+    bgImage: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80',
   },
   {
     id: 'pentest',
@@ -38,34 +36,35 @@ const SLIDES = [
     description:
       'Nos experts certifiés OSCP et CEH simulent des attaques réelles sur vos systèmes pour identifier les vulnérabilités avant les acteurs malveillants.',
     icon: Code,
-    accentFrom: 'from-sky-400',
-    accentTo: 'to-blue-500',
-    glowColor: 'bg-sky-600/5',
-    glowColor2: 'bg-blue-900/5',
+    accentFrom: 'from-emerald-400',
+    accentTo: 'to-violet-500',
+    bgImage: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920&q=80',
   },
 ]
 
-/** Animated tech-grid background for the hero */
-function TechGrid({ glowColor, glowColor2 }) {
+/** Crossfade background image layer */
+function SlideBackground({ slide }) {
   return (
-    <div
-      className="absolute inset-0 overflow-hidden pointer-events-none"
-      aria-hidden="true"
-    >
-      <div
-        className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(59, 130, 246, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59, 130, 246, 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950" />
-      <div className={`absolute top-1/4 left-1/4 w-96 h-96 ${glowColor} rounded-full blur-3xl transition-colors duration-700`} />
-      <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 ${glowColor2} rounded-full blur-3xl transition-colors duration-700`} />
-    </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={slide.id}
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1.2, ease: 'easeInOut' }}
+        aria-hidden="true"
+      >
+        <img
+          src={slide.bgImage}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/80 via-[#0f172a]/70 to-[#0f172a]" />
+      </motion.div>
+    </AnimatePresence>
   )
 }
 
@@ -91,14 +90,14 @@ function SlideContent({ slide, direction }) {
       className="text-center"
     >
       {/* Badge */}
-      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-600/20 text-blue-400 border border-blue-600/30 mb-6">
+      <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mb-6">
         <Icon className="w-3.5 h-3.5" aria-hidden="true" />
         {slide.badge}
       </span>
 
       <h1
         id="hero-heading"
-        className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-slate-100 leading-tight mb-6"
+        className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tighter text-slate-100 leading-tight mb-6"
       >
         {slide.title}{' '}
         <span className={`bg-gradient-to-r ${slide.accentFrom} ${slide.accentTo} bg-clip-text text-transparent`}>
@@ -106,7 +105,7 @@ function SlideContent({ slide, direction }) {
         </span>
       </h1>
 
-      <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mb-10 leading-relaxed">
+      <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
         {slide.description}
       </p>
     </motion.div>
@@ -143,10 +142,11 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden bg-[#0f172a]"
       aria-labelledby="hero-heading"
     >
-      <TechGrid glowColor={slide.glowColor} glowColor2={slide.glowColor2} />
+      {/* Full-screen crossfade background images */}
+      <SlideBackground slide={slide} />
 
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Carousel slides */}
@@ -165,15 +165,17 @@ export default function Hero() {
         >
           <a
             href="#services"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-blue-600/25 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 text-white rounded-xl font-semibold text-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-emerald-500/25 active:scale-95"
+            style={{ background: 'linear-gradient(135deg, #10b981, #8b5cf6)' }}
           >
             Nos Services
             <ArrowRight className="w-5 h-5" aria-hidden="true" />
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 hover:border-slate-600 rounded-xl font-semibold text-lg transition-all active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/15 text-slate-100 border border-white/20 hover:border-emerald-400/40 rounded-xl font-semibold text-lg transition-all backdrop-blur-sm active:scale-95"
           >
+            <ShieldCheck className="w-5 h-5" aria-hidden="true" />
             Audit Gratuit
           </a>
         </motion.div>
@@ -182,7 +184,7 @@ export default function Hero() {
         <div className="flex items-center justify-center gap-6 mt-10">
           <button
             onClick={prev}
-            className="p-2 rounded-full bg-slate-800/60 hover:bg-slate-700 border border-slate-700 text-slate-400 hover:text-blue-400 transition-all"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-slate-300 hover:text-emerald-400 transition-all backdrop-blur-sm"
             aria-label="Diapositive précédente"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -199,8 +201,8 @@ export default function Hero() {
                 onClick={() => goTo(i, i > current ? 1 : -1)}
                 className={`transition-all duration-300 rounded-full ${
                   i === current
-                    ? 'w-6 h-2.5 bg-blue-500'
-                    : 'w-2.5 h-2.5 bg-slate-600 hover:bg-slate-500'
+                    ? 'w-6 h-2.5 bg-emerald-400'
+                    : 'w-2.5 h-2.5 bg-white/30 hover:bg-white/50'
                 }`}
               />
             ))}
@@ -208,7 +210,7 @@ export default function Hero() {
 
           <button
             onClick={next}
-            className="p-2 rounded-full bg-slate-800/60 hover:bg-slate-700 border border-slate-700 text-slate-400 hover:text-blue-400 transition-all"
+            className="p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-slate-300 hover:text-emerald-400 transition-all backdrop-blur-sm"
             aria-label="Diapositive suivante"
           >
             <ChevronRight className="w-5 h-5" />
@@ -217,7 +219,7 @@ export default function Hero() {
 
         {/* Stats */}
         <motion.div
-          className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-slate-500"
+          className="mt-16 flex flex-wrap justify-center gap-8 text-sm text-slate-400"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
@@ -230,7 +232,9 @@ export default function Hero() {
             { value: '24/7', label: 'Support continu' },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col items-center gap-1">
-              <span className="text-2xl font-bold text-blue-400">{stat.value}</span>
+              <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-violet-400 bg-clip-text text-transparent">
+                {stat.value}
+              </span>
               <span>{stat.label}</span>
             </div>
           ))}

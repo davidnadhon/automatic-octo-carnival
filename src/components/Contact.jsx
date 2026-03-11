@@ -89,13 +89,14 @@ export default function Contact() {
           >
             <CheckCircle2 className="w-20 h-20 text-green-400" aria-hidden="true" />
           </motion.div>
-          <h2 className="text-3xl font-bold text-slate-100 mb-4">Message envoyé !</h2>
+          <h2 className="text-3xl font-bold tracking-tighter text-slate-100 mb-4">Message envoyé !</h2>
           <p className="text-slate-400 text-lg mb-8">
             Merci pour votre message. Notre équipe vous contactera dans les 24 heures.
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-semibold transition-colors"
+            className="px-6 py-3 text-white rounded-xl font-semibold transition-all hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/20"
+            style={{ background: 'linear-gradient(135deg, #10b981, #8b5cf6)' }}
           >
             Envoyer un autre message
           </button>
@@ -118,12 +119,12 @@ export default function Contact() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-blue-500 text-sm font-semibold tracking-widest uppercase">
+          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase">
             Parlons de votre sécurité
           </span>
           <h2
             id="contact-heading"
-            className="mt-3 text-3xl sm:text-4xl font-bold text-slate-100"
+            className="mt-3 text-3xl sm:text-4xl font-bold tracking-tighter text-slate-100"
           >
             Contactez-Nous
           </h2>
@@ -164,7 +165,7 @@ export default function Contact() {
                     aria-describedby={errors.name ? 'name-error' : undefined}
                     aria-invalid={!!errors.name}
                     placeholder="Jean Dupont"
-                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors ${
+                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors ${
                       errors.name ? 'border-red-500' : 'border-slate-700 hover:border-slate-600'
                     }`}
                   />
@@ -192,7 +193,7 @@ export default function Contact() {
                     aria-describedby={errors.email ? 'email-error' : undefined}
                     aria-invalid={!!errors.email}
                     placeholder="jean@entreprise.com"
-                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors ${
+                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors ${
                       errors.email ? 'border-red-500' : 'border-slate-700 hover:border-slate-600'
                     }`}
                   />
@@ -218,7 +219,7 @@ export default function Contact() {
                     onChange={handleChange}
                     autoComplete="tel"
                     placeholder="+33 6 00 00 00 00"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
                   />
                 </div>
 
@@ -238,7 +239,7 @@ export default function Contact() {
                     aria-describedby={errors.subject ? 'subject-error' : undefined}
                     aria-invalid={!!errors.subject}
                     placeholder="Audit de sécurité"
-                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors ${
+                    className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors ${
                       errors.subject ? 'border-red-500' : 'border-slate-700 hover:border-slate-600'
                     }`}
                   />
@@ -265,7 +266,7 @@ export default function Contact() {
                   aria-describedby={errors.message ? 'message-error' : undefined}
                   aria-invalid={!!errors.message}
                   placeholder="Décrivez vos besoins en sécurité..."
-                  className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-colors resize-none ${
+                  className={`w-full px-4 py-3 rounded-xl bg-slate-800 border text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors resize-none ${
                     errors.message ? 'border-red-500' : 'border-slate-700 hover:border-slate-600'
                   }`}
                 />
@@ -279,7 +280,8 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full flex items-center justify-center gap-2 px-6 py-4 bg-blue-600 hover:bg-blue-500 disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-base transition-all hover:shadow-lg hover:shadow-blue-600/25 active:scale-[0.99]"
+                className="w-full flex items-center justify-center gap-2 px-6 py-4 text-white rounded-xl font-semibold text-base transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-emerald-500/20 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed disabled:scale-100"
+                style={isSubmitting ? {} : { background: 'linear-gradient(135deg, #10b981, #8b5cf6)' }}
                 aria-busy={isSubmitting}
               >
                 {isSubmitting ? (
