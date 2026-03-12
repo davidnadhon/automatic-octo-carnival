@@ -79,7 +79,7 @@ export default function OsintWidget() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/60"
+        className="py-16 px-4 sm:px-6 lg:px-8 bg-slate-900/40 border-y border-slate-700/40"
         aria-labelledby="osint-heading"
       >
         <div className="max-w-4xl mx-auto relative">

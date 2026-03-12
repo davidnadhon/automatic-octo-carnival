@@ -18,9 +18,9 @@ export default function Footer() {
                 className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors w-fit mb-4"
                 aria-label="CyberShield Solutions - Retour en haut"
               >
-                <Shield className="w-6 h-6" aria-hidden="true" />
-                <span className="text-lg font-bold text-slate-100">
-                  Cyber<span className="text-blue-500">Shield</span>
+                <Shield className="w-6 h-6 text-emerald-400" aria-hidden="true" />
+                <span className="text-lg font-bold tracking-tighter text-slate-100">
+                  Cyber<span className="bg-gradient-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Shield</span>
                 </span>
               </a>
               <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
@@ -36,7 +36,7 @@ export default function Footer() {
                   <a
                     key={label}
                     href={href}
-                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-blue-400 transition-colors"
+                    className="w-9 h-9 flex items-center justify-center rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-emerald-400 transition-colors"
                     aria-label={label}
                     rel="noopener noreferrer"
                   >
@@ -60,7 +60,7 @@ export default function Footer() {
                   <li key={item}>
                     <a
                       href="#services"
-                      className="text-slate-400 hover:text-blue-400 text-sm transition-colors"
+                      className="text-slate-400 hover:text-emerald-400 text-sm transition-colors"
                     >
                       {item}
                     </a>
@@ -75,17 +75,17 @@ export default function Footer() {
               </h3>
               <ul className="space-y-2.5" role="list">
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
+                  <a href="#" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">
                     Politique de Confidentialité
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
+                  <a href="#" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">
                     Conditions d&apos;Utilisation
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-slate-400 hover:text-blue-400 text-sm transition-colors">
+                  <a href="#" className="text-slate-400 hover:text-emerald-400 text-sm transition-colors">
                     Politique Cookies
                   </a>
                 </li>
@@ -93,7 +93,7 @@ export default function Footer() {
                 <li>
                   <button
                     onClick={() => setIsLegalOpen(true)}
-                    className="text-slate-400 hover:text-blue-400 text-sm transition-colors text-left"
+                    className="text-slate-400 hover:text-emerald-400 text-sm transition-colors text-left"
                   >
                     Mentions Légales &amp; RGPD
                   </button>
@@ -103,7 +103,7 @@ export default function Footer() {
                     href="/.well-known/security.txt"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 font-medium text-sm transition-colors"
+                    className="text-emerald-400 hover:text-emerald-300 font-medium text-sm transition-colors"
                   >
                     Security Policy
                   </a>

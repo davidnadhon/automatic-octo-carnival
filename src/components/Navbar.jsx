@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Shield, Menu, X, Scan } from 'lucide-react'
+import { Shield, Menu, X, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ScannerModal from './ScannerModal'
 
@@ -26,7 +26,7 @@ export default function Navbar() {
         role="banner"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-slate-950/80 backdrop-blur-md border-b border-slate-800'
+            ? 'bg-[#0f172a]/80 backdrop-blur-xl border-b border-slate-700/50 shadow-lg shadow-black/20'
             : 'bg-transparent'
         }`}
       >
@@ -38,12 +38,12 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             <a
               href="#"
-              className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors"
+              className="flex items-center gap-2 hover:opacity-90 transition-opacity"
               aria-label="CyberShield Solutions - Accueil"
             >
-              <Shield className="w-7 h-7" aria-hidden="true" />
-              <span className="text-xl font-bold text-slate-100">
-                Cyber<span className="text-blue-500">Shield</span>
+              <Shield className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+              <span className="text-xl font-bold tracking-tighter text-slate-100">
+                Cyber<span className="bg-gradient-to-r from-emerald-400 to-violet-500 bg-clip-text text-transparent">Shield</span>
               </span>
             </a>
 
@@ -52,27 +52,28 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-slate-300 hover:text-blue-400 transition-colors font-medium text-sm tracking-wide"
+                    className="text-slate-300 hover:text-emerald-400 transition-colors font-medium text-sm tracking-wide"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
-              {/* Diagnostic button */}
+              {/* Diagnostic Flash button */}
               <li>
                 <button
                   onClick={() => setIsScannerOpen(true)}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-slate-200 rounded-lg text-sm font-medium transition-all"
-                  aria-label="Lancer un diagnostic rapide de sécurité"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-slate-800/80 hover:bg-slate-700/80 border border-slate-600/50 hover:border-emerald-500/50 text-slate-200 rounded-lg text-sm font-medium transition-all backdrop-blur-sm"
+                  aria-label="Lancer un diagnostic Flash de sécurité"
                 >
-                  <Scan className="w-4 h-4 text-green-400" aria-hidden="true" />
-                  Diagnostic rapide
+                  <Zap className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                  Diagnostic Flash
                 </button>
               </li>
               <li>
                 <a
                   href="#contact"
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
+                  className="relative px-4 py-2 rounded-lg text-sm font-semibold text-white transition-all shadow-lg shadow-emerald-600/20 hover:shadow-emerald-500/30 hover:scale-105 active:scale-95"
+                  style={{ background: 'linear-gradient(135deg, #10b981, #8b5cf6)' }}
                   aria-label="Demander un audit gratuit"
                 >
                   Audit Gratuit
@@ -98,34 +99,35 @@ export default function Navbar() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="md:hidden border-t border-slate-800 bg-slate-950/95 backdrop-blur-md"
+                className="md:hidden border-t border-slate-700/50 bg-[#0f172a]/95 backdrop-blur-xl"
               >
                 <ul className="flex flex-col py-4 gap-2" role="list">
                   {navLinks.map((link) => (
                     <li key={link.href}>
                       <a
                         href={link.href}
-                        className="block px-4 py-2 text-slate-300 hover:text-blue-400 transition-colors font-medium"
+                        className="block px-4 py-2 text-slate-300 hover:text-emerald-400 transition-colors font-medium"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         {link.label}
                       </a>
                     </li>
                   ))}
-                  {/* Mobile diagnostic button */}
+                  {/* Mobile diagnostic Flash button */}
                   <li className="px-4 pt-1">
                     <button
                       onClick={() => { setIsMenuOpen(false); setIsScannerOpen(true) }}
-                      className="flex items-center gap-2 w-full px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-lg text-sm font-medium transition-all"
+                      className="flex items-center gap-2 w-full px-4 py-2 bg-slate-800/80 hover:bg-slate-700 border border-slate-600/50 text-slate-200 rounded-lg text-sm font-medium transition-all"
                     >
-                      <Scan className="w-4 h-4 text-green-400" aria-hidden="true" />
-                      Diagnostic rapide
+                      <Zap className="w-4 h-4 text-emerald-400" aria-hidden="true" />
+                      Diagnostic Flash
                     </button>
                   </li>
                   <li className="px-4 pt-1">
                     <a
                       href="#contact"
-                      className="block w-full text-center px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
+                      className="block w-full text-center px-4 py-2 text-white rounded-lg text-sm font-semibold transition-all"
+                      style={{ background: 'linear-gradient(135deg, #10b981, #8b5cf6)' }}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       Audit Gratuit

@@ -23,7 +23,7 @@ export default function Expertise() {
   return (
     <section
       id="expertise"
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/50"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-900/30"
       aria-labelledby="expertise-heading"
     >
       <div className="max-w-7xl mx-auto">
@@ -34,12 +34,12 @@ export default function Expertise() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-blue-500 text-sm font-semibold tracking-widest uppercase">
+          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase">
             Notre savoir-faire
           </span>
           <h2
             id="expertise-heading"
-            className="mt-3 text-3xl sm:text-4xl font-bold text-slate-100"
+            className="mt-3 text-3xl sm:text-4xl font-bold tracking-tighter text-slate-100"
           >
             Expertise &amp; Certifications
           </h2>
@@ -55,7 +55,7 @@ export default function Expertise() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-xl font-semibold text-slate-200 mb-6">
+            <h3 className="text-xl font-semibold tracking-tight text-slate-200 mb-6">
               Compétences Techniques
             </h3>
             <div className="space-y-5" role="list" aria-label="Compétences techniques">
@@ -65,12 +65,12 @@ export default function Expertise() {
                   <div key={skill.label} role="listitem">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <Icon className="w-4 h-4 text-blue-400" aria-hidden="true" />
+                        <Icon className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                         <span className="text-sm font-medium text-slate-300">
                           {skill.label}
                         </span>
                       </div>
-                      <span className="text-sm font-semibold text-blue-400">
+                      <span className="text-sm font-semibold text-emerald-400">
                         {skill.level}%
                       </span>
                     </div>
@@ -83,7 +83,8 @@ export default function Expertise() {
                       aria-label={`${skill.label}: ${skill.level}%`}
                     >
                       <motion.div
-                        className="h-full bg-gradient-to-r from-blue-600 to-blue-400 rounded-full"
+                        className="h-full rounded-full"
+                        style={{ background: 'linear-gradient(90deg, #10b981, #8b5cf6)' }}
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         viewport={{ once: true }}
@@ -102,7 +103,7 @@ export default function Expertise() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-xl font-semibold text-slate-200 mb-6">
+            <h3 className="text-xl font-semibold tracking-tight text-slate-200 mb-6">
               Certifications Reconnues
             </h3>
             <div
@@ -114,20 +115,20 @@ export default function Expertise() {
                 <motion.div
                   key={cert.name}
                   role="listitem"
-                  className="p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-600/50 transition-colors group"
+                  className="p-4 rounded-xl bg-slate-900/60 border border-slate-700/50 hover:border-violet-500/40 transition-colors group backdrop-blur-sm"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.07 }}
                 >
                   <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-600/20 border border-blue-600/30 flex items-center justify-center group-hover:bg-blue-600/30 transition-colors" aria-hidden="true">
-                      <Award className="w-5 h-5 text-blue-400" />
+                    <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet-500/10 border border-violet-500/20 flex items-center justify-center group-hover:bg-violet-500/20 transition-colors" aria-hidden="true">
+                      <Award className="w-5 h-5 text-violet-400" />
                     </div>
                     <div>
                       <div className="font-bold text-slate-100 text-sm">{cert.name}</div>
                       <div className="text-xs text-slate-400 mt-0.5">{cert.description}</div>
-                      <div className="text-xs text-blue-500 mt-1 font-medium">{cert.issuer}</div>
+                      <div className="text-xs text-emerald-400 mt-1 font-medium">{cert.issuer}</div>
                     </div>
                   </div>
                 </motion.div>

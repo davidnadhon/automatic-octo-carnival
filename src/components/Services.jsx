@@ -8,7 +8,7 @@ const services = [
     description:
       'Évaluation complète de votre posture de sécurité avec alignement sur les normes ISO 27001. Analyse de risques détaillée et plan de remédiation personnalisé.',
     tags: ['ISO 27001', 'Analyse de risques', 'RGPD'],
-    color: 'blue',
+    color: 'emerald',
   },
   {
     icon: Bug,
@@ -16,7 +16,7 @@ const services = [
     description:
       "Simulations d'attaques réelles sur vos infrastructures Web, Réseau et Cloud. Identification et exploitation des vulnérabilités avant les attaquants.",
     tags: ['Web App', 'Réseau', 'Cloud'],
-    color: 'indigo',
+    color: 'violet',
   },
   {
     icon: Siren,
@@ -24,7 +24,7 @@ const services = [
     description:
       "Gestion de crise cybersécurité disponible 24h/24, 7j/7. Containment rapide, investigation forensique et restauration de la continuité d'activité.",
     tags: ['24/7', 'Forensique', 'Continuité'],
-    color: 'violet',
+    color: 'emerald',
   },
   {
     icon: GraduationCap,
@@ -32,29 +32,25 @@ const services = [
     description:
       'Programmes de formation sur mesure pour vos équipes. Simulations de phishing, ateliers pratiques et campagnes de sensibilisation continues.',
     tags: ['Anti-phishing', 'Formation', 'e-Learning'],
-    color: 'sky',
+    color: 'violet',
   },
 ]
 
 const colorMap = {
-  blue: 'bg-blue-600/10 text-blue-400 border-blue-600/20 group-hover:bg-blue-600/20',
-  indigo: 'bg-indigo-600/10 text-indigo-400 border-indigo-600/20 group-hover:bg-indigo-600/20',
-  violet: 'bg-violet-600/10 text-violet-400 border-violet-600/20 group-hover:bg-violet-600/20',
-  sky: 'bg-sky-600/10 text-sky-400 border-sky-600/20 group-hover:bg-sky-600/20',
+  emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 group-hover:bg-emerald-500/20',
+  violet: 'bg-violet-500/10 text-violet-400 border-violet-500/20 group-hover:bg-violet-500/20',
 }
 
 const tagColorMap = {
-  blue: 'bg-blue-600/10 text-blue-400',
-  indigo: 'bg-indigo-600/10 text-indigo-400',
-  violet: 'bg-violet-600/10 text-violet-400',
-  sky: 'bg-sky-600/10 text-sky-400',
+  emerald: 'bg-emerald-500/10 text-emerald-400',
+  violet: 'bg-violet-500/10 text-violet-400',
 }
 
 export default function Services() {
   return (
     <section
       id="services"
-      className="py-24 px-4 sm:px-6 lg:px-8"
+      className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0f172a]"
       aria-labelledby="services-heading"
     >
       <div className="max-w-7xl mx-auto">
@@ -65,12 +61,12 @@ export default function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-blue-500 text-sm font-semibold tracking-widest uppercase">
+          <span className="text-emerald-400 text-sm font-semibold tracking-widest uppercase">
             Ce que nous faisons
           </span>
           <h2
             id="services-heading"
-            className="mt-3 text-3xl sm:text-4xl font-bold text-slate-100"
+            className="mt-3 text-3xl sm:text-4xl font-bold tracking-tighter text-slate-100"
           >
             Nos Services de Cybersécurité
           </h2>
@@ -86,15 +82,17 @@ export default function Services() {
         >
           {services.map((service, index) => {
             const Icon = service.icon
+            // Alternate: even indexes come from left, odd from right
+            const xFrom = index % 2 === 0 ? -60 : 60
             return (
               <motion.article
                 key={service.title}
                 role="listitem"
-                className="group relative p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-all duration-300 hover:shadow-xl hover:shadow-slate-950/50 hover:-translate-y-1"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                className="group relative p-8 rounded-2xl bg-slate-900/60 border border-slate-700/50 hover:border-emerald-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-950/50 hover:-translate-y-1 backdrop-blur-sm"
+                initial={{ opacity: 0, x: xFrom }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <div
                   className={`inline-flex p-3 rounded-xl border transition-colors duration-300 mb-5 ${colorMap[service.color]}`}
@@ -102,7 +100,7 @@ export default function Services() {
                 >
                   <Icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-100 mb-3">
+                <h3 className="text-xl font-bold tracking-tight text-slate-100 mb-3">
                   {service.title}
                 </h3>
                 <p className="text-slate-400 leading-relaxed mb-5">
